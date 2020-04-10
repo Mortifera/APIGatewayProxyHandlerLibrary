@@ -2,13 +2,11 @@
 using System.Text;
 using Amazon.Lambda.APIGatewayEvents;
 using APIGatewayHandlerLibrary.Routing;
-using NLog;
 
 namespace APIGatewayHandlerLibrary.Interceptors
 {
     public class CORSInterceptorHandler : IRouteHandler
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly string[] _accessOrigins;
 
         private readonly IRouteHandler _routeHandler;
@@ -26,7 +24,6 @@ namespace APIGatewayHandlerLibrary.Interceptors
 
             if (_accessOrigins == null || _accessOrigins.Length == 0)
             {
-                Logger.Warn("No access origins");
                 return response;
             }
 
