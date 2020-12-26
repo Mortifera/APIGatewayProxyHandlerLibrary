@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using Amazon.Lambda.APIGatewayEvents;
-using Newtonsoft.Json;
 
 namespace APIGatewayHandlerLibrary.Responses
 {
@@ -18,7 +16,7 @@ namespace APIGatewayHandlerLibrary.Responses
             HttpStatusCode httpStatusCode = HttpStatusCode.InternalServerError)
         {
             Body = errorMessage;
-            StatusCode = (int) httpStatusCode;
+            StatusCode = (int)httpStatusCode;
 #if _DEBUG
             Headers = new Dictionary<string, string>
             {
@@ -31,7 +29,7 @@ namespace APIGatewayHandlerLibrary.Responses
             HttpStatusCode httpStatusCode = HttpStatusCode.InternalServerError)
         {
             Body = errorMessage;
-            StatusCode = (int) httpStatusCode;
+            StatusCode = (int)httpStatusCode;
         }
     }
 }

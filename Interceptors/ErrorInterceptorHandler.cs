@@ -9,12 +9,12 @@ namespace APIGatewayHandlerLibrary.Interceptors
 {
     public class ErrorInterceptorHandler : IRouteHandler
     {
-        private readonly IRouteHandler _routeHandler;
         private readonly Dictionary<Type, HttpStatusCode> _exceptionToHttpStatusCode;
+        private readonly IRouteHandler _routeHandler;
 
-        public ErrorInterceptorHandler(IRouteHandler routeHandler) : this(routeHandler, new Dictionary<Type, HttpStatusCode>())
+        public ErrorInterceptorHandler(IRouteHandler routeHandler) : this(routeHandler,
+            new Dictionary<Type, HttpStatusCode>())
         {
-
         }
 
         public ErrorInterceptorHandler(IRouteHandler routeHandler,
@@ -32,14 +32,12 @@ namespace APIGatewayHandlerLibrary.Interceptors
             }
             catch (Exception e)
             {
-                System.Console.WriteLine(e);
+                Console.WriteLine(e);
 
-                HttpStatusCode statusCode = HttpStatusCode.InternalServerError;
+                var statusCode = HttpStatusCode.InternalServerError;
 
                 if (_exceptionToHttpStatusCode.ContainsKey(e.GetType()))
-                {
                     statusCode = _exceptionToHttpStatusCode[e.GetType()];
-                }
 
                 return new APIGatewayErrorResponse(e, statusCode);
             }

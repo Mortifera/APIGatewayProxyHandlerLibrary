@@ -1,13 +1,14 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace APIGatewayHandlerLibrary.Routing
 {
     public class MultiRoute : IRoute
     {
-        private ICollection<IRoute> routes;
+        private readonly ICollection<IRoute> routes;
 
-        public MultiRoute(params IRoute[] routes) {
+        public MultiRoute(params IRoute[] routes)
+        {
             this.routes = routes.ToList();
         }
 

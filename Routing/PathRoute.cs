@@ -7,9 +7,8 @@ namespace APIGatewayHandlerLibrary.Routing
         private readonly string _pathPattern;
 
         /**
-         *  pathPattern must be the path, with path parameters in braces {}. 
-         *  E.g. "/api/users/{userID}/data" where {userID} is an expected path parameter. So "/api/user/user1/data" would be a match.
-         * 
+         * pathPattern must be the path, with path parameters in braces {}. 
+         * E.g. "/api/users/{userID}/data" where {userID} is an expected path parameter. So "/api/user/user1/data" would be a match.
          */
         public PathRoute(string baseUri, string pathPattern) : this(baseUri + pathPattern)
         {
@@ -23,7 +22,9 @@ namespace APIGatewayHandlerLibrary.Routing
         public bool Matches(string path, HttpMethod httpMethod, IDictionary<string, string> pathParameters)
         {
             foreach (var keyValuePair in pathParameters)
+            {
                 path = path.Replace(keyValuePair.Value, "{" + keyValuePair.Key + "}");
+            }
 
             return _pathPattern.Equals(path);
         }

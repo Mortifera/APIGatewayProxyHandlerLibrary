@@ -20,7 +20,10 @@ namespace APIGatewayHandlerLibrary.Interceptors
         public APIGatewayProxyResponse Handle(APIGatewayProxyRequest request)
         {
             var response = _routeHandler.Handle(request);
-            if (response.Headers == null) response.Headers = new Dictionary<string, string>();
+            if (response.Headers == null)
+            {
+                response.Headers = new Dictionary<string, string>();
+            }
 
             if (_accessOrigins == null || _accessOrigins.Length == 0)
             {
@@ -30,7 +33,10 @@ namespace APIGatewayHandlerLibrary.Interceptors
             var stringBuilder = new StringBuilder();
 
             stringBuilder.Append(_accessOrigins[0]);
-            for (var i = 1; i < _accessOrigins.Length; ++i) stringBuilder.Append($",{_accessOrigins[i]}");
+            for (var i = 1; i < _accessOrigins.Length; ++i)
+            {
+                stringBuilder.Append($",{_accessOrigins[i]}");
+            }
 
             response.Headers.Add("Access-Control-Allow-Origin", stringBuilder.ToString());
             return response;
